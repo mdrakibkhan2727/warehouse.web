@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ApiService } from '../api.service';
 import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-warehouse',
-  imports:[CommonModule,FormsModule,ReactiveFormsModule,BrowserModule,HttpClientModule],
+  standalone: true,  // ✅ important for standalone components
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './werehouse.component.html',
   styleUrls: ['./werehouse.component.css']
 })
@@ -18,7 +17,10 @@ export class WarehouseComponent implements OnInit {
   products: any[] = [];
   selectedWarehouseId: number | null = null;
 
-  constructor(private fb: FormBuilder, private api: ApiService) {
+  constructor(
+    private fb: FormBuilder,
+    private api: ApiService
+  ) {
     this.warehouseForm = this.fb.group({
       name: ['', Validators.required],
       location: ['', Validators.required]
@@ -54,7 +56,7 @@ export class WarehouseComponent implements OnInit {
     if (this.productForm.valid) {
       this.api.addProduct(this.productForm.value).subscribe(() => {
         this.productForm.reset();
-        if(this.selectedWarehouseId)
+        if (this.selectedWarehouseId)
           this.loadProducts(this.selectedWarehouseId);
       });
     }

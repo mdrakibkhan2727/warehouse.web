@@ -1,38 +1,43 @@
-<h2>Create Warehouse</h2>
-<form [formGroup]="warehouseForm" (ngSubmit)="addWarehouse()">
-  <input type="text" placeholder="Warehouse Name" formControlName="name" required />
-  <input type="text" placeholder="Location" formControlName="location" required />
-  <button type="submit">Add Warehouse</button>
-</form>
+<div class="container">
+  <h2>Add Warehouse</h2>
+  <form [formGroup]="warehouseForm" (ngSubmit)="addWarehouse()">
+    <input formControlName="name" placeholder="Warehouse Name" />
+    <input formControlName="location" placeholder="Location" />
+    <button type="submit">Add Warehouse</button>
+  </form>
 
-<hr />
+  <hr />
 
-<h2>Add Product</h2>
-<form [formGroup]="productForm" (ngSubmit)="addProduct()">
-  <input type="text" placeholder="Product Name" formControlName="name" required />
-  <input type="number" placeholder="Quantity" formControlName="quantity" required />
-  <select formControlName="warehouseId" required>
-    <option value="" disabled selected>Select Warehouse</option>
-    <option *ngFor="let w of warehouses" [value]="w.id">{{ w.name }}</option>
-  </select>
-  <button type="submit">Add Product</button>
-</form>
+  <h2>Add Product</h2>
+  <form [formGroup]="productForm" (ngSubmit)="addProduct()">
+    <input formControlName="name" placeholder="Product Name" />
+    <input formControlName="quantity" type="number" placeholder="Quantity" />
+    <select formControlName="warehouseId">
+      <option [value]="null" disabled>Select Warehouse</option>
+      <option *ngFor="let wh of warehouses" [value]="wh.id">
+        {{ wh.name }}
+      </option>
+    </select>
+    <button type="submit">Add Product</button>
+  </form>
 
-<hr />
+  <hr />
 
-<h2>Products of Selected Warehouse</h2>
-<select>
-  <option value="" disabled selected>Select Warehouse</option>
-  <option *ngFor="let w of warehouses" [value]="w.id">{{ w.name }}</option>
-</select>
-
-<table border="1" *ngIf="products.length > 0">
-  <tr>
-    <th>Name</th>
-    <th>Quantity</th>
-  </tr>
-  <tr *ngFor="let p of products">
-    <td>{{p.name}}</td>
-    <td>{{p.quantity}}</td>
-  </tr>
-</table>
+  <h2>Products</h2>
+  <table *ngIf="products.length > 0">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Quantity</th>
+        <th>Warehouse</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of products">
+        <td>{{ p.name }}</td>
+        <td>{{ p.quantity }}</td>
+        <td>{{ p.warehouse?.name }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
