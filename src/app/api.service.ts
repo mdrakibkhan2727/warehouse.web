@@ -6,23 +6,23 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiService {
-  private baseUrl = 'https://localhost:5001/api';
+  private baseUrl = 'https://localhost:5001/api/v1/';
 
   constructor(private http: HttpClient) { }
 
   getWarehouses(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/warehouse`);
+    return this.http.get(`${this.baseUrl}/warehouses`);
   }
 
   addWarehouse(data: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/warehouse`, data);
   }
 
-  getProductsByWarehouse(warehouseId: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/product/${warehouseId}`);
+  getProductsByWarehouse(id: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/warehouses/${id}/inventory`);
   }
 
   addProduct(data: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/product`, data);
+    return this.http.post(`${this.baseUrl}/products`, data);
   }
 }

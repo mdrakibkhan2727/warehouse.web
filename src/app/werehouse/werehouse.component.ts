@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ApiService } from '../services/api.service';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ApiService } from '../api.service';
+import { CommonModule } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-warehouse',
-  templateUrl: './warehouse.component.html',
-  styleUrls: ['./warehouse.component.css']
+  imports:[CommonModule,FormsModule,ReactiveFormsModule,BrowserModule,HttpClientModule],
+  templateUrl: './werehouse.component.html',
+  styleUrls: ['./werehouse.component.css']
 })
 export class WarehouseComponent implements OnInit {
   warehouseForm: FormGroup;

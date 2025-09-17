@@ -21,7 +21,7 @@
 <hr />
 
 <h2>Products of Selected Warehouse</h2>
-<select (change)="loadProducts($event.target.value)">
+<select>
   <option value="" disabled selected>Select Warehouse</option>
   <option *ngFor="let w of warehouses" [value]="w.id">{{ w.name }}</option>
 </select>
